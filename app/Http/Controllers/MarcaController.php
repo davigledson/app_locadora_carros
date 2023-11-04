@@ -49,10 +49,16 @@ class MarcaController extends Controller
         //stateless
 
         $image = $request->file('imagem');
-        $image->store('imagens','public');
+        $imagem_urn = $image->store('imagens','public');
+
+
+
         //aponta para o diretório storage
         //pode omitir o segundo parâmetro se for o 'local'
-        dd('Upload de arquivos');
+       $marca = $this->marca->create([
+        'nome'=> $request->nome,
+        'imagem'=> $imagem_urn,
+       ]);
         //$marca = $this->marca->create($request->all());
         return response()->json($marca,201) ;
     }
