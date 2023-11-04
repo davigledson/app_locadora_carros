@@ -9,12 +9,18 @@ class Marca extends Model
 {
     use HasFactory;
     protected $fillable= ['nome', 'imagem'];
-
+    //um rule que funcione para todos os métodos
     public function rules(){
         return [
-            'nome'=> 'required|unique:marcas|min:3',
+            'nome'=> 'required|unique:marcas,nome,'.$this->id.'|min:3',
             'imagem'=>'required'
         ];
+        /*
+        unique:marcas - parametros
+          1) tabela
+          2) nome da coluna que será pesquisada na tabela
+          3) id do registro que será desconsiderado na pesquisa
+         */
 
     }
     public function feedback(){
