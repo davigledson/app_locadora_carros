@@ -12,8 +12,8 @@ class Modelo extends Model
     //um rule que funcione para todos os métodos
     public function rules(){
         return [
-            'marca_id' => 'exists:marca,id',
-            'nome'=> 'required|unique:modelo,nome,'.$this->id.'|min:3',
+            'marca_id' => 'exists:marcas,id',
+            'nome'=> 'required|unique:modelos,nome,'.$this->id.'|min:3',
             'imagem'=>'required|file|mimes:png,jpeg,jpg',
             'numero_portas'=>'required|integer|digits_between:1,5',
             'lugares'=>'required|integer|digits_between:1,20',
