@@ -124,8 +124,7 @@ class ModeloController extends Controller
         $request->validate($modelo->rules());
        }
 
-       $image = $request->file('imagem');
-       $imagem_urn = $image->store('imagens/modelos','public');
+
        //aponta para o diretório storage
        //pode omitir o segundo parâmetro se for o 'local'
 
@@ -133,8 +132,15 @@ class ModeloController extends Controller
        //remove o arquivo antigo caso um novo seja enviado no request
        if($request->file('imagem')){
         Storage::disk('public')->delete($modelo->imagem);
+        $image = $request->file('imagem');
+        $imagem_urn = $image->store('imagens/modelos','public');
+        $modelo->fill($request->all()); //sobrepõe os valores dos atributos desse objeto
+        $modelo->imagem = $imagem_urn;
        }
-       $modelo->update([
+
+       $modelo->save();
+       /*
+$modelo->update([
         'marca_id' =>$request->marca_id,
         'nome'=> $request->nome,
         'imagem'=> $imagem_urn,
@@ -143,6 +149,8 @@ class ModeloController extends Controller
         'air_bag'=>$request->air_bag,
         'abs'=>$request->abs,
        ]) ;
+       */
+
 
        return response()->json($modelo,200) ;
     }
