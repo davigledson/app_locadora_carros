@@ -18,15 +18,43 @@ class MarcaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $marcas = $this->marca->with('modelos')->get();
-       // $marcas = Marca::all();
+        $marcas = array();
 
-       //all() -> criando um obj de consulta + get() = collection
-       //get() -> possibilidade de modificar a consulta ->collection
-        return response()->json($marcas,200);
+        if($request->has('atributos_modelo')){
+            $atributos_modelos = $request->atributos_modelos;
+            $marcas =  $this->marca->with('modelos:id,'.$atributos_modelos);
+        } else {
+            $marcas = $this->marca->with('modelos');
+        }
+
+        if($request->has('filtro')){
+
+            $filtros = explode(';',$request->filtro);
+            
+            foreach($filtros as $key => $condicao){
+            $c = explode(':',$condicao);
+            $marcas = $marcas->where($c[0],$c[1],$c[2]);
+            }
+
+        }
+
+       if($request->has('atributos')){
+        $atributos = $request->atributos;
+        //selectRaw - aceita dessa forma id,nome,imagem
+
+        //dd($atributos_marca);
+        //e preciso o id para o eloquent cruza os dados
+        $marcas = $marcas->selectRaw($atributos)->get();
+       // dd($request->atributos);
+        //id,nome,imagem
+       } else {
+        $marcas =  $marcas->get();
+       }
+       // return response()->json($this->marca->with('marca')->get(),200);
+
+       return response()->json($marcas,200);
     }
 
     /**
