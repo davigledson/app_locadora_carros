@@ -23,14 +23,24 @@ class ModeloController extends Controller
         //
         $modelos = array();
 
+        if($request->has('atributos_marca')){
+            $atributos_marca = $request->atributos_marca;
+            $modelos =  $this->modelo->with('marca:id,'.$atributos_marca);
+        } else {
+            $modelos = $this->modelo->with('marca');
+        }
+
        if($request->has('atributos')){
         $atributos = $request->atributos;
         //selectRaw - aceita dessa forma id,nome,imagem
-        $modelos = $this->modelo->selectRaw($atributos)->with('marca')->get();
+
+        //dd($atributos_marca);
+        //e preciso o id para o eloquent cruza os dados
+        $modelos = $modelos->selectRaw($atributos)->get();
        // dd($request->atributos);
         //id,nome,imagem
        } else {
-        $modelos = $this->modelo->with('marca')->get();
+        $modelos =  $modelos->get();
        }
        // return response()->json($this->modelo->with('marca')->get(),200);
 
