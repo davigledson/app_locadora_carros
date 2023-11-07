@@ -6,6 +6,8 @@ use App\Models\Modelo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Repositories\ModeloRepository;
+
 class ModeloController extends Controller
 {
     protected $modelo;
@@ -20,47 +22,28 @@ class ModeloController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $modelos = array();
+
+        $modeloRepository = new ModeloRepository($this->modelo);
+
 
         if($request->has('atributos_marca')){
-            $atributos_marca = $request->atributos_marca;
-            $modelos =  $this->modelo->with('marca:id,'.$atributos_marca);
+            $atributos_marca ='marca:id,'. $request->atributos_marca;
+
+            $modeloRepository->selectAtributosRegistrosRelacionados($atributos_marca);
         } else {
-            $modelos = $this->modelo->with('marca');
-        }
 
+            $modeloRepository->selectAtributosRegistrosRelacionados('marca');
+        }
         if($request->has('filtro')){
-
-
-
-            $filtros = explode(';',$request->filtro) ;
-            foreach($filtros as $key => $condicao){
-
-
-            $c = explode(':',$condicao);
-            $modelos = $modelos->where($c[0],$c[1],$c[2]);
-            }
-
+            $modeloRepository->filtro($request->filtro);
         }
 
-       if($request->has('atributos')){
-        $atributos = $request->atributos;
-        //selectRaw - aceita dessa forma id,nome,imagem
+        if($request->has('atributos')){
+            $modeloRepository->selectAtributos($request->atributos);
+           }
+       
 
-        //dd($atributos_marca);
-        //e preciso o id para o eloquent cruza os dados
-        $modelos = $modelos->selectRaw($atributos)->get();
-       // dd($request->atributos);
-        //id,nome,imagem
-       } else {
-        $modelos =  $modelos->get();
-       }
-       // return response()->json($this->modelo->with('marca')->get(),200);
-
-       return response()->json($modelos,200);
-        //all() -> criando um obj de consulta + get() = collection
-       //get() -> possibilidade de modificar a consulta ->collection
+       return response()->json($modeloRepository->getResultado(),200);
     }
 
     /**

@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Repositories;
 use Illuminate\Database\Eloquent\Model;
 
 
-class MarcaRepository {
+class ModeloRepository {
     protected $model;
 
     public function __construct(Model $model)
@@ -40,3 +41,4 @@ class MarcaRepository {
 
 
 }
+
