@@ -28,7 +28,7 @@ Route::get('/', function () {
     return ['Chegamos até aqui' => 'SIM'];
 });
 //as rotas edit e create vão sumir
-Route::apiResource('cliente',ClienteController::class);
+Route::apiResource('cliente',ClienteController::class)->middleware('jwt.auth');
 Route::apiResource('carro',CarroController::class);
 Route::apiResource('locacao',LocacaoController::class);
 Route::apiResource('marca',MarcaController::class);
