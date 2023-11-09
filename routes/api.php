@@ -29,15 +29,15 @@ Route::get('/', function () {
 });
 //as rotas edit e create vão sumir
 Route::prefix('v1')->middleware('jwt.auth')->group(function (){
-  Route::apiResource('cliente',ClienteController::class);
+Route::apiResource('cliente',ClienteController::class);
 Route::apiResource('carro',CarroController::class);
 Route::apiResource('locacao',LocacaoController::class);
 Route::apiResource('marca',MarcaController::class);
-Route::apiResource('modelo',ModeloController::class);  
+Route::apiResource('modelo',ModeloController::class); 
+Route::post('me',[AuthController::class,'me']); 
 });
 
 
 Route::post('login',[AuthController::class,'login']);
 Route::post('logout',[AuthController::class,'logout']);
 Route::post('refresh',[AuthController::class,'refresh']);
-Route::post('me',[AuthController::class,'me']);
