@@ -2,11 +2,14 @@
    <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            {{ xyz}} - {{ abc}} - {{ numeroParcelas }} - {{ token_csrf }}
             <div class="card">
                 <div class="card-header">Componente Vue </div>
 
                 <div class="card-body">
                     <form method="POST" action="">
+
+                        <input type="hidden" name="_token" :value="token_csrf">
                         
 
                         <div class="row mb-3">
@@ -62,4 +65,15 @@
     </div>
 </div>
 </template>
+
+<script>
+    export default {
+        props: [
+            'xyz',
+            'abc',
+            'numeroParcelas',
+            'token_csrf'
+        ] //data (semelhante)
+    }
+</script>
 
