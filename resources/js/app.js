@@ -17,8 +17,12 @@ const app = createApp({});
 
 import ExampleComponent from './components/ExampleComponent.vue';
 import Login from './components/Login.vue';
+import Home from './components/Home.vue';
+
 app.component('example-component', ExampleComponent);
 app.component('login-component', Login);
+app.component('home-component', Home);
+
 
 /**
  * The following block of code may be used to automatically register your
