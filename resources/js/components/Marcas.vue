@@ -4,18 +4,29 @@
          <div class="col-md-8">
              <div class="card">
                  <div class="card-header">Busca de Marcas</div>
- 
+                
+
+            
+
                  <div class="card-body">
                           <div class="row">
                             <div class="col mb-3">
-                    <label for="inputID" class="form-label">iD</label>
-                    <input type="number" class="form-control" id="inputID" aria-describedby="idHelp" placeholder="ID da marca">
-                    <div id="idHelp" class="form-text text-muted">Opcional informe o ID do registro</div>
-                </div>
+                                
+                    <input-container-component titulo="id da marca" id="inputId" id-help="idHelp"  texto-ajuda="Opcional informe o id da marca">
+
+                    <input type="number" class="form-control" id="inputId" aria-describedby="idHelp" placeholder="ID">
+                
+                    </input-container-component>
+                 
+                    
+                            </div>
                 <div class="col mb-3">
-                    <label for="inputNome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="inputNome" aria-describedby="nomeHelp" placeholder="nome da marca">
-                    <div id="nomeHelp" class="form-text text-muted">Opcional informe o nome da marca</div>
+
+                  <input-container-component titulo="Nome da marca" id="inputNome" id-help="nomeHelp" texto-ajuda="Opcional informe o nome da marca" >
+                 <input type="text" class="form-control" id="inputNome" aria-describedby="nomeHelp" placeholder="nome da marca">
+                
+                    </input-container-component>
+
                 </div>
                 
                           </div>

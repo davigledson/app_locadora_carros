@@ -19,11 +19,13 @@ import ExampleComponent from './components/ExampleComponent.vue';
 import Login from './components/Login.vue';
 import Home from './components/Home.vue';
 import Marcas from './components/Marcas.vue';
+import InputContainer from './components/InputContainer.vue';
 
 app.component('example-component', ExampleComponent);
 app.component('login-component', Login);
 app.component('home-component', Home);
 app.component('marcas-component', Marcas);
+app.component('input-container-component', InputContainer);
 
 
 /**
