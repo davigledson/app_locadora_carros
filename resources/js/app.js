@@ -18,10 +18,12 @@ const app = createApp({});
 import ExampleComponent from './components/ExampleComponent.vue';
 import Login from './components/Login.vue';
 import Home from './components/Home.vue';
+import Marcas from './components/Marcas.vue';
 
 app.component('example-component', ExampleComponent);
 app.component('login-component', Login);
 app.component('home-component', Home);
+app.component('marcas-component', Marcas);
 
 
 /**
