@@ -21,12 +21,14 @@ import Home from './components/Home.vue';
 import Marcas from './components/Marcas.vue';
 import InputContainer from './components/InputContainer.vue';
 import Table from './components/Table.vue';
+import Card from './components/Card.vue';
 app.component('example-component', ExampleComponent);
 app.component('login-component', Login);
 app.component('home-component', Home);
 app.component('marcas-component', Marcas);
 app.component('input-container-component', InputContainer);
 app.component('table-component', Table);
+app.component('card-component', Card);
 
 
 

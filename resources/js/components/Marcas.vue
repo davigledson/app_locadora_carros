@@ -2,14 +2,9 @@
     <div class="container">
      <div class="row justify-content-center">
          <div class="col-md-8">
-             <div class="card mb-3">
-                 <div class="card-header">Busca de Marcas</div>
-                
-
-            
-
-                 <div class="card-body">
-                          <div class="row">
+            <card-component titulo="Busca de marcas">
+                <template v-slot:conteudo>
+                    <div class="row">
                             <div class="col mb-3">
                                 
                     <input-container-component titulo="id da marca" id="inputId" id-help="idHelp"  texto-ajuda="Opcional informe o id da marca">
@@ -30,28 +25,22 @@
                 </div>
                 
                           </div>
-                
-               
-                
-       
-                 </div>
-                 <div class="card-footer">
+                </template>
+                <template v-slot:rodape>
                     <button type="submit" class="btn btn-primary btm-sm float-end">Pesquisa</button>
-                </div>
-             </div>
+                </template>
+            </card-component>
+            
              <!-- -------------------------------------- -->
-             <div class="card">
-                 <div class="card-header">Relação de Marcas</div>
+             <card-component titulo="Relação de marcas">
+               <template v-slot:conteudo>
+                <table-component></table-component>
+               </template>
 
-
-                 <div class="card-body">
-                          <table-component></table-component>
-                
-                 </div>
-                 <div class="card-footer">
-                    <button type="button" class="btn btn-primary btm-sm float-end">Adicionar</button>
-                </div>
-             </div>
+               <template v-slot:rodape>
+                <button type="submit" class="btn btn-primary btm-sm float-end">Adicionar</button>
+                </template>
+             </card-component>
          </div>
      </div>
  </div> 
