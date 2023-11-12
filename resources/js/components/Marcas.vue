@@ -83,6 +83,7 @@
         
      </modal-component>
 
+
  </div> 
  </template>
 
@@ -94,9 +95,8 @@ export default {
             arquivoImagem: [],
             urlBase: 'http://localhost:8000/api/v1/marca',
             transacaoStatus:'',
-            transacaoDetalhes: {
-
-            }
+            transacaoDetalhes: {},
+            marcas: [],
         }
     },
     computed: {
@@ -111,6 +111,16 @@ export default {
             },
         },
     methods: {
+        carregarLista(){
+            axios.get(this.urlBase)
+            .then(response => {
+                this.marcas = response.data
+                console.log(this.marcas)
+            })
+            .catch(errors =>{
+                console.log(errors)
+            })
+        },
        
         carregarImagem(e){
             this.arquivoImagem = e.target.files
@@ -147,8 +157,13 @@ export default {
                 //errors.response.data.message
             })
             //pede a url, conteúdo e configuração da requisição
+        },
+        
+    },
+    //mounted - faz carregar automaticamente os metodos
+    mounted(){
+            this.carregarLista()
         }
-    }
 }
 </script>
  
