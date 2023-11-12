@@ -94,7 +94,9 @@ export default {
             arquivoImagem: [],
             urlBase: 'http://localhost:8000/api/v1/marca',
             transacaoStatus:'',
-            transacaoDetalhes:[]
+            transacaoDetalhes: {
+
+            }
         }
     },
     computed: {
@@ -131,11 +133,16 @@ export default {
                 this.transacaoStatus = 'adicionado'
                 //console.log(response)
                 
-                this.transacaoDetalhes =response
+                this.transacaoDetalhes ={
+                    mensagem: 'ID do registro: ' +  response.data.id 
+                } 
             })
             .catch(errors =>{
                 this.transacaoStatus = 'erro'
-                this.transacaoDetalhes =errors.response
+                this.transacaoDetalhes = {
+                    mensagem: errors.response.data.message,
+                    dados: errors.response.data.errors
+                }
                 //console.log(errors)
                 //errors.response.data.message
             })
