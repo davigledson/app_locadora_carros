@@ -48,7 +48,13 @@
 
 
      <modal-component id="modalMarca" titulo="Adicionar Marca">
+        <template v-slot:alertas>
+                <alert-component tipo="success" mensagem="Sucesso ao cadastra a marca"></alert-component>
+                <alert-component tipo="danger" mensagem="Erro ao cadastra a marca"> </alert-component>
+            </template>
+
         <template v-slot:conteudo>
+            
             <div class="form-group">
             <input-container-component titulo="Nome da marca" id="novoNome" id-help="novoNomeHelp" texto-ajuda="informe o nome da marca" >
 
