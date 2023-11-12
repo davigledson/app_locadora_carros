@@ -86,7 +86,19 @@ export default {
             urlBase: 'http://localhost:8000/api/v1/marca'
         }
     },
+    computed: {
+            token(){
+                let token = document.cookie.split(';').find(indice => {
+                    return indice,indice.includes('token=')
+                });
+                token = token.split('=')[1];
+                token = 'Bearer ' + token
+                
+                return token
+            },
+        },
     methods: {
+       
         carregarImagem(e){
             this.arquivoImagem = e.target.files
         },
@@ -99,7 +111,8 @@ export default {
             let config = {
                 headers: {
                     'Content-type': 'multipart/form-data',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': this.token
                 }
             }
             axios.post(this.urlBase,formData,config)
