@@ -36,7 +36,12 @@
                <template v-slot:conteudo>
                 <table-component 
                 :dados="marcas"
-                :titulos="['id', 'nome', 'imagem']"
+                :titulos= "{
+                    id: {titulo: 'ID',tipo:'texto'},
+                    nome: {titulo: 'Nome',tipo:'texto'},
+                    imagem: {titulo: 'Imagem', tipo:'imagem'},
+                    created_at: {titulo: 'Criação',tipo:'data'},
+                }"
                 ></table-component>
                </template>
 
@@ -124,7 +129,7 @@ export default {
             axios.get(this.urlBase,config)
             .then(response => {
                 this.marcas = response.data
-                console.log(this.marcas)
+                //console.log(this.marcas)
             })
             .catch(errors =>{
                 console.log(errors)
