@@ -128,8 +128,8 @@ export default {
             }
             axios.get(this.urlBase,config)
             .then(response => {
-                this.marcas = response.data
-                //console.log(this.marcas)
+                this.marcas = response.data.data
+                console.log(this.marcas)
             })
             .catch(errors =>{
                 console.log(errors)
