@@ -46,7 +46,25 @@
                </template>
 
                <template v-slot:rodape>
+                <div class="row">
+                    <div class="col-10"> 
+                        <paginate-component>
+                            <li v-for="l,key in marcas.links" :key='key'  class="page-item">
+                                
+                                <a class="page-link" href="#" v-html="l.label"></a>
+                            </li>
+                        
+                        
+                        </paginate-component>
+                    </div>
+
+                    <div class="col">
                 <button type="submit" class="btn btn-primary btm-sm float-end" data-bs-toggle="modal" data-bs-target="#modalMarca">Adicionar</button>
+                    </div>
+                   
+                </div>
+                
+               
                 </template>
              </card-component>
          </div>
@@ -84,6 +102,7 @@
         </template>
 
         <template v-slot:rodape>
+        
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
         <button type="button" class="btn btn-primary" @click="salvar()">Salvar</button>
         </template>
