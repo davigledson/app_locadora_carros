@@ -9,7 +9,7 @@
                                 
                     <input-container-component titulo="id da marca" id="inputId" id-help="idHelp"  texto-ajuda="Opcional informe o id da marca">
 
-                    <input type="number" class="form-control" id="inputId" aria-describedby="idHelp" placeholder="ID">
+                    <input type="number" class="form-control" id="inputId" aria-describedby="idHelp" placeholder="ID" v-model="busca.id">
                 
                     </input-container-component>
                  
@@ -18,7 +18,7 @@
                 <div class="col mb-3">
 
                   <input-container-component titulo="Nome da marca" id="inputNome" id-help="nomeHelp" texto-ajuda="Opcional informe o nome da marca" >
-                 <input type="text" class="form-control" id="inputNome" aria-describedby="nomeHelp" placeholder="nome da marca">
+                 <input type="text" class="form-control" id="inputNome" aria-describedby="nomeHelp" placeholder="nome da marca"  v-model="busca.nome">
                 
                     </input-container-component>
 
@@ -27,7 +27,7 @@
                           </div>
                 </template>
                 <template v-slot:rodape>
-                    <button type="submit" class="btn btn-primary btm-sm float-end">Pesquisa</button>
+                    <button type="submit" class="btn btn-primary btm-sm float-end" @click='pesquisar()'>Pesquisa</button >
                 </template>
             </card-component>
             
@@ -125,9 +125,8 @@ export default {
             urlBase: 'http://localhost:8000/api/v1/marca',
             transacaoStatus:'',
             transacaoDetalhes: {},
-            marcas: {
-                data: []
-            },
+            marcas: { data: []},
+            busca: { id:'', nome:''}
         }
     },
     computed: {
@@ -142,6 +141,22 @@ export default {
             },
         },
     methods: {
+        pesquisar(){
+            //console.log(this.busca)
+            let filtro= '';
+            for(let chave in  this.busca) {
+                //console.log(chave, this.busca[chave])
+                if(this.busca[chave]){
+                    if (filtro != ''){
+                    filtro += ';'
+                }
+                filtro += chave + ':like:' + this.busca[chave]
+                }
+                
+                
+            }
+            console.log(filtro)
+        },
         paginacao(l){
             if(l.url){
                 this.urlBase = l.url //ajustando a url de consulta com  oparametro de pagina
