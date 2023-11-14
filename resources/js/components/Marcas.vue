@@ -123,6 +123,8 @@ export default {
             nomeMarca:'',
             arquivoImagem: [],
             urlBase: 'http://localhost:8000/api/v1/marca',
+            urlPaginacao:'',
+            urlFIltro:'',
             transacaoStatus:'',
             transacaoDetalhes: {},
             marcas: { data: []},
@@ -155,23 +157,33 @@ export default {
                 
                 
             }
-            console.log(filtro)
+            if(filtro != ''){
+                this.urlPaginacao ='page=1'
+                 this.urlFIltro ='&filtro=' + filtro
+            } else {
+                this.urlFIltro =''
+            }
+            this.carregarLista()
+          
         },
         paginacao(l){
             if(l.url){
-                this.urlBase = l.url //ajustando a url de consulta com  oparametro de pagina
+                //this.urlBase = l.url //ajustando a url de consulta com  oparametro de pagina
+                this.urlPaginacao = l.url.split('?')[1]
                 this.carregarLista() //requisitando novamente os dados para nossa API
             }
         
     },
         carregarLista(){
+             let url = this.urlBase +'?' + this.urlPaginacao + this.urlFIltro
+             console.log(url)
             let config = {
                 headers: {
                     'Accept': 'application/json',
                     'Authorization': this.token
                 }
             }
-            axios.get(this.urlBase,config)
+            axios.get(url,config)
             .then(response => {
                 this.marcas = response.data
                // console.log(this.marcas)
@@ -219,7 +231,7 @@ export default {
         },
         
     },
-    //mounted - faz carregar automaticamente os metodos
+    //mounted - faz carregar automaticamente os métodos
     mounted(){
             this.carregarLista()
         }
