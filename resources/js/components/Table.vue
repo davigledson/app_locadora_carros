@@ -5,7 +5,7 @@
                         <thead>
                             <tr>
                             <th  v-for="t, key in titulos" :key="key" scope="col" >{{ t.titulo }}</th>
-
+                                <th v-if="visualizar || atualizar || remover"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,7 +24,15 @@
                                     </span> 
                                 
                                 </td>
+                                <td  v-if="visualizar || atualizar || remover">
+                                <button v-if="visualizar" class="btn btn-outline-primary btn-sm"> Visualizar</button>
+
+                                <button v-if="atualizar" class="btn btn-outline-primary btn-sm"> Atualizar</button>
+
+                                <button v-if="remover" class="btn btn-outline-danger btn-sm"> Remover</button>
+                            </td>
                             </tr>
+                            
                            
                             <!-- <tr v-for="obj in dados" :key="obj.id">
                                 <template   v-for="valor, chave in obj"  :key="chave">
@@ -55,7 +63,7 @@
 
 <script>
     export default {
-       props: ['dados','titulos'],
+       props: ['dados','titulos','atualizar','remover','visualizar'],
        computed: {
         dadosFiltrados(){
            // console.log(this.dados)
