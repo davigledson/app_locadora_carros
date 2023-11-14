@@ -49,9 +49,10 @@
                 <div class="row">
                     <div class="col-10"> 
                         <paginate-component>
-                            <li v-for="l,key in marcas.links" :key='key'  class="page-item">
+                            <li v-for="l,key in marcas.links" :key='key'  :class="l.active ? 'page-item active' : 'page-item'" @click="paginacao(l)">
                                 
                                 <a class="page-link" href="#" v-html="l.label"></a>
+                                
                             </li>
                         
                         
@@ -116,6 +117,7 @@
 
  <script>
 export default {
+   
     data() {
         return {
             nomeMarca:'',
@@ -140,6 +142,13 @@ export default {
             },
         },
     methods: {
+        paginacao(l){
+            if(l.url){
+                this.urlBase = l.url //ajustando a url de consulta com  oparametro de pagina
+                this.carregarLista() //requisitando novamente os dados para nossa API
+            }
+        
+    },
         carregarLista(){
             let config = {
                 headers: {
@@ -150,7 +159,7 @@ export default {
             axios.get(this.urlBase,config)
             .then(response => {
                 this.marcas = response.data
-                console.log(this.marcas)
+               // console.log(this.marcas)
             })
             .catch(errors =>{
                 console.log(errors)
@@ -161,7 +170,7 @@ export default {
             this.arquivoImagem = e.target.files
         },
         salvar(){
-            console.log(this.nomeMarca,this.arquivoImagem[0]);
+            //console.log(this.nomeMarca,this.arquivoImagem[0]);
             let formData = new FormData();
             formData.append('nome',this.nomeMarca);
             formData.append('imagem',this.arquivoImagem[0]);
