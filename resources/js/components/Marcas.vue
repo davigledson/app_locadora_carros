@@ -36,7 +36,8 @@
                <template v-slot:conteudo>
                 <table-component 
                 :dados="marcas.data"
-                :visualizar="true"
+                :visualizar="{
+                    visivel: true, dataToggle:'modal',dataTarget:'#modalMarcaVisualizar'}"
                 :atualizar="true"
                 :remover="true"
                 :titulos= "{
@@ -118,7 +119,7 @@
           <!--inicio do modal visualização de marca-->
           <modal-component id="modalMarcaVisualizar" titulo="Visualizar marca">
             <template v-slot:alertas>
-                
+
             </template>
             <template v-slot:conteudo>
                 Teste
