@@ -25,7 +25,7 @@
                                 
                                 </td>
                                 <td  v-if="visualizar || atualizar || remover">
-                                <button v-if="visualizar" class="btn btn-outline-primary btn-sm"> Visualizar</button>
+                                <button v-if="visualizar" class="btn btn-outline-primary btn-sm" data-bs-target="#modalMarcaVisualizar" data-bs-toggle="modal"> Visualizar</button>
 
                                 <button v-if="atualizar" class="btn btn-outline-primary btn-sm"> Atualizar</button>
 

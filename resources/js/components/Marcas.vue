@@ -74,7 +74,7 @@
          </div>
      </div>
 
-     <!-- Button trigger modal -->
+     <!--inicio do modal de inclusão de marca-->
 
 
      <modal-component id="modalMarca" titulo="Adicionar Marca">
@@ -113,6 +113,27 @@
         
         
      </modal-component>
+
+          <!--fim do modal de inclusão de marca-->
+          <!--inicio do modal visualização de marca-->
+          <modal-component id="modalMarcaVisualizar" titulo="Visualizar marca">
+            <template v-slot:alertas>
+                
+            </template>
+            <template v-slot:conteudo>
+                Teste
+            </template>
+            <template v-slot:rodape>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </template>
+          </modal-component>
+          <!--fim do modal visualização de marca-->
+          
+          
+          
+
+
+
 
 
  </div> 
