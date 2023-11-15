@@ -38,7 +38,9 @@
                 :dados="marcas.data"
                 :visualizar="{
                     visivel: true, dataToggle:'modal',dataTarget:'#modalMarcaVisualizar'}"
-                :atualizar="true"
+                :atualizar="{
+                    visivel:true, 
+                    dataToggle:'modal',dataTarget:'#modalMarcaAtualizar'}"
                 :remover="{
                     visivel:true, dataToggle:'modal',dataTarget:'#modalMarcaRemover'
 
@@ -176,6 +178,42 @@
             </template>
           </modal-component>
           <!--fim do modal visualização de marca-->
+
+        <!--inicio do modal atualização de marca-->
+
+          <modal-component id="modalMarcaAtualizar" titulo="Adicionar Marca">
+            <template v-slot:alertas>
+
+            </template>
+
+        <template v-slot:conteudo>
+            
+            <div class="form-group">
+            <input-container-component
+             titulo="Nome da marca" id="NomeAtualizar" id-help="NomeAtualizarHelp" texto-ajuda="informe o nome da marca" >
+
+                 <input type="text" class="form-control" id="NomeAtualizar" aria-describedby="NomeAtualizarHelp" placeholder="adicionar o nome da marca" v-model="nomeMarca">
+             
+            </input-container-component>
+        </div>
+
+        <div class="form-group">
+            <input-container-component titulo="Imagem" id="ImagemAtualizar" id-help="ImagemAtualizarHelp" texto-ajuda="Selecione uma imagem no formato png" >
+            
+                 <input type="file" class="form-control" id="ImagemAtualizar" aria-describedby="ImagemAtualizarHelp" placeholder="Selecione uma imagem" @change="carregarImagem($event)">
+                
+            </input-container-component>
+        </div>
+        </template>
+
+        <template v-slot:rodape>
+        
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" @click="atualizar()">Atualizar</button>
+        </template>
+        
+        
+     </modal-component>
           
           
           
@@ -188,7 +226,7 @@
  </template>
 
  <script>
-import InputContainer from './InputContainer.vue';
+
 export default {
   
    
@@ -217,6 +255,9 @@ export default {
             },
         },
     methods: {
+        atualizar(){
+            console.log(this.$store.state.item)
+        },
         remover(){
             let confimacao = confirm('Tem certeza que deseja remover esse registro')
             if (!confimacao){
