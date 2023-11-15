@@ -14,7 +14,9 @@ const store = createStore(
     { 
         state: { 
             teste: 'Teste de recuperação de valor da Store Vuex',
-            item: 'dfsfdsfsdafff'
+            item: {},
+            transacao: {status:'',mensagem:'',}
+
      } 
     }
     ) 
