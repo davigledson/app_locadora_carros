@@ -181,7 +181,7 @@
 
         <!--inicio do modal atualização de marca-->
 
-          <modal-component id="modalMarcaAtualizar" titulo="Adicionar Marca">
+          <modal-component id="modalMarcaAtualizar" titulo="Atualizar Marca">
             <template v-slot:alertas>
 
             </template>
@@ -192,7 +192,7 @@
             <input-container-component
              titulo="Nome da marca" id="NomeAtualizar" id-help="NomeAtualizarHelp" texto-ajuda="informe o nome da marca" >
 
-                 <input type="text" class="form-control" id="NomeAtualizar" aria-describedby="NomeAtualizarHelp" placeholder="adicionar o nome da marca" v-model="nomeMarca">
+                 <input type="text" class="form-control" id="NomeAtualizar" aria-describedby="NomeAtualizarHelp" placeholder="adicionar o nome da marca" v-model="$store.state.item.nome">
              
             </input-container-component>
         </div>
@@ -204,6 +204,7 @@
                 
             </input-container-component>
         </div>
+        {{ $store.state.item }}
         </template>
 
         <template v-slot:rodape>
@@ -256,7 +257,32 @@ export default {
         },
     methods: {
         atualizar(){
-            console.log(this.$store.state.item)
+            console.log('nome atualizado',this.$store.state.item.nome)
+            console.log('imagem',this.arquivoImagem);
+            console.log('verbo','patch');
+
+            let formData = new FormData();
+            formData.append('_method','patch');
+            formData.append('nome',this.$store.state.item.nome);
+            formData.append('imagem',this.arquivoImagem[0]);
+
+            let url = this.urlBase +'/' +this.$store.state.item.id
+
+            let config = {
+                headers: {
+                    'Content-Type': 'multipart/form',
+                    'Accept': 'application/json',
+                    'Authorization': this.token,
+                }
+            }
+            axios.post(url,formData,config)
+            .then(response => {
+                console.log('Atualizado',response)
+                this.carregarLista()
+            }) 
+            .catch(errors =>{
+                console.log('Erro de atualização',errors.response)
+            })
         },
         remover(){
             let confimacao = confirm('Tem certeza que deseja remover esse registro')
