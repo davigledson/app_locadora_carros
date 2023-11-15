@@ -170,6 +170,7 @@
 
             <template v-slot:rodape>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="remover()">Remover</button>
             </template>
           </modal-component>
           <!--fim do modal visualização de marca-->
@@ -214,6 +215,34 @@ export default {
             },
         },
     methods: {
+        remover(){
+            let confimacao = confirm('Tem certeza que deseja remover esse registro')
+            if (!confimacao){
+                return false
+            }
+            let url = this.urlBase +'/'+ this.$store.state.item.id
+            //console.log(url)
+            let formData = new FormData();
+            formData.append('_method','delete')
+
+            let config = {
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': this.token,
+                    'Content-Type':'multipart/form-data',
+                }
+            }
+
+            axios.post(url, formData, config)
+            .then(response => {
+                console.log('registro removido com sucesso',response),
+                this.carregarLista()
+            })
+            .catch(errors => {
+                console.log('Houver um erro na tentativa de remoção do registro',errors.response.data)
+            })
+           
+        },
         pesquisar(){
             //console.log(this.busca)
             let filtro= '';
