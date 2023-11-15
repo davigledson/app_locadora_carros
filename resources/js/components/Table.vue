@@ -1,6 +1,7 @@
 <template>
                <div>
-               
+               {{ $store.state.teste }}
+               <button @click="$store.state.teste = 'Modificado com sucesso'">Teste</button>
                   <table class="table table-hover">
                         <thead>
                             <tr>
