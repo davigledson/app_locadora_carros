@@ -10,7 +10,14 @@ import { createStore } from 'vuex'
 //Importando e configurando  o vuex
 
 
-const store = createStore({ state: { teste: 'Teste de recuperação de valor da Store Vuex' } }) 
+const store = createStore(
+    { 
+        state: { 
+            teste: 'Teste de recuperação de valor da Store Vuex',
+            item: 'dfsfdsfsdafff'
+     } 
+    }
+    ) 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready

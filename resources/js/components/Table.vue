@@ -1,7 +1,6 @@
 <template>
                <div>
-               {{ $store.state.teste }}
-               <button @click="$store.state.teste = 'Modificado com sucesso'">Teste</button>
+               
                   <table class="table table-hover">
                         <thead>
                             <tr>
@@ -26,7 +25,7 @@
                                 
                                 </td>
                                 <td  v-if="visualizar.visivel || atualizar || remover">
-                                <button v-if="visualizar.visivel" class="btn btn-outline-primary btn-sm" :data-bs-target="visualizar.dataTarget" :data-bs-toggle="visualizar.dataToggle"> Visualizar</button>
+                                <button v-if="visualizar.visivel" class="btn btn-outline-primary btn-sm" :data-bs-target="visualizar.dataTarget" :data-bs-toggle="visualizar.dataToggle" @click="setStore(obj)"> Visualizar</button>
 
                                 <button v-if="atualizar" class="btn btn-outline-primary btn-sm"> Atualizar</button>
 
@@ -65,6 +64,11 @@
 <script>
     export default {
        props: ['dados','titulos','atualizar','remover','visualizar'],
+       methods: {
+        setStore(obj){
+            this.$store.state.item = obj
+        },
+       },
        computed: {
         dadosFiltrados(){
            // console.log(this.dados)
