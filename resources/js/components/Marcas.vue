@@ -183,6 +183,9 @@
 
           <modal-component id="modalMarcaAtualizar" titulo="Atualizar Marca">
             <template v-slot:alertas>
+                <alert-component tipo="success" mensagem="Atualização realizada com sucesso" :detalhes="$store.state.transacao" v-if="$store.state.transacao.status == 'sucesso'"></alert-component>
+
+            <alert-component tipo="danger" mensagem="Erro na Transação " :detalhes="$store.state.transacao" v-if="$store.state.transacao.status == 'erro'"></alert-component>
 
             </template>
 
@@ -204,7 +207,7 @@
                 
             </input-container-component>
         </div>
-        {{ $store.state.item }}
+       
         </template>
 
         <template v-slot:rodape>
@@ -281,12 +284,17 @@ export default {
             }
             axios.post(url,formData,config)
             .then(response => {
-                console.log('Atualizado',response)
-               ImagemAtualizar.value =''
-                this.carregarLista()
+               // console.log('Atualizado',response);
+               ImagemAtualizar.value ='';
+               this.$store.state.transacao.status ='sucesso'
+                this.$store.state.transacao.mensagem = 'Registro de marca atualizado com sucesso'
+                this.carregarLista();
             }) 
             .catch(errors =>{
-                console.log('Erro de atualização',errors.response)
+                //console.log('Erro de atualização',errors.response);
+                this.$store.state.transacao.status ='erro'
+                this.$store.state.transacao.mensagem = errors.response.data.message
+                this.$store.state.transacao.dados = errors.response.data.errors
             })
         },
         remover(){
