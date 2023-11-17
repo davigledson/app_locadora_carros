@@ -31,3 +31,30 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+//intercepta os request da aplicação
+axios.interceptors.request.use(
+ config => {
+    console.log('Interceptando o requesta ntes do envio',config)
+
+    return config
+ },
+ error=> {
+    console.log('Erro na requisição:',error)
+    return Promise.reject(error)
+}
+)
+
+//intercepta os responses da aplicação
+axios.interceptors.response.use(
+    response => {
+        console.log('Interceptando a resposta antes da aplicacao',response)
+
+        return response
+    },
+    error => {
+        console.log('Erro na resposta:',error)
+        return Promise.reject(error)
+    }
+)
+
