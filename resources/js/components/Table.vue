@@ -16,7 +16,7 @@
                                     <span v-if="titulos[chaveValor].tipo == 'texto'">{{ valor }}</span> 
 
                                     <span v-if="titulos[chaveValor].tipo == 'data'">
-                                    {{ '...' + valor }}
+                                    {{formataDataTempoGLobal(valor)}}
                                     </span> 
 
                                     <span v-if="titulos[chaveValor].tipo == 'imagem'">
@@ -63,8 +63,10 @@
 
 <script>
     export default {
+        
        props: ['dados','titulos','atualizar','remover','visualizar'],
        methods: {
+       
         setStore(obj){
             this.$store.state.transacao.status ='';
             this.$store.state.transacao.mensagem ='';

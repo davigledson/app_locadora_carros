@@ -27,6 +27,24 @@ const store = createStore(
  */
 
 const app = createApp({});
+//funcao global
+app.config.globalProperties.formataDataTempoGLobal = function(d){
+    if(!d) return '';
+
+    d = d.split('T')
+
+    let data = d[0];
+    let tempo = d[1];
+
+    //formatando a data
+    data = data.split('-');
+    data = data[2] + '/' + data[1] + '/' + data[0]
+      
+    //console.log(tempo)  
+    tempo = tempo.split('.')
+    tempo = tempo[0]
+    return data + ' ' + tempo
+}
 
 import ExampleComponent from './components/ExampleComponent.vue';
 import Login from './components/Login.vue';
