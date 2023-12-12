@@ -157,7 +157,8 @@ class MarcaController extends Controller
         $marca->fill($request->all());
     if($request->file('imagem')){
         //remove o arquivo antigo caso um novo seja enviado no request
-        Storage::disk('public')->delete($marca->imagem);$image = $request->file('imagem');
+        Storage::disk('public')->delete($marca->imagem);
+        $image = $request->file('imagem');
        $imagem_urn = $image->store('imagens','public');
        $marca->imagem = $imagem_urn;
        }
